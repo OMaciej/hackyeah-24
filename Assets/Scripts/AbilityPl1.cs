@@ -10,7 +10,7 @@ public class AbilityPl1 : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        rb.tag = "Player";
     }
 
     // Update is called once per frame
@@ -19,13 +19,14 @@ public class AbilityPl1 : MonoBehaviour
         if (Input.GetKeyDown("q"))
         {
             rb.transform.localScale = new UnityEngine.Vector3(3f, 3f, 0);
+            rb.tag = "StrongLemur";
 
         }
 
         if (Input.GetKeyDown("e"))
         {
             rb.transform.localScale = new UnityEngine.Vector3(1f, 1f, 0);
-
+            rb.tag = "Player";
         }
     }
 }

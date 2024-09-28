@@ -177,7 +177,9 @@ MonoBehaviour:
   accelRate: 1
   deccelRate: 1
   maxJumpInputDelay: 0
-  jumpForce: 5
+  jumpForce: 7
+  coyoteTime: 0
+  jumpCoyoteTimer: 0
 --- !u!1 &6248415920360917350
 GameObject:
   m_ObjectHideFlags: 0
