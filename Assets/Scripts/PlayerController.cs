@@ -11,20 +11,30 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         jumpInputTimer = 0f;
+        jumpCoyoteTimer = 0f;
     }
 
     private void Update()
     {
         updateTimers();
+        bool grounded = isGrounded();
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        isGrounded();
+
+        if(grounded && rb.velocity.y <= 0f)
+        {
+            jumpCoyoteTimer = coyoteTime;
+        } 
 
         if(Input.GetButton("Jump"))
         {
-            jumpInputTimer = maxJumpInputDelay;
+            if(grounded || (jumpCoyoteTimer > 0f && rb.velocity.y <= 0f))
+            {
+                jump();
+            }
         }
 
-        if (jumpInputTimer >= 0f && isGrounded())
+        else if (jumpInputTimer > 0f && grounded && rb.velocity.y <= 0f)
         {
             jump();
         }
@@ -49,10 +59,12 @@ public class PlayerController : MonoBehaviour
     private void updateTimers()
     {
         jumpInputTimer -= Time.deltaTime;
+        jumpCoyoteTimer -= Time.deltaTime;
     }
 
     private void jump()
     {
+        jumpCoyoteTimer = 0f;
         float targetJmpForce = (jumpForce - rb.velocity.y);
         rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
     }
@@ -72,9 +84,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float deccelRate;
     [SerializeField] private float maxJumpInputDelay;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float coyoteTime;
 
     private Rigidbody2D rb;
 
-    private float jumpInputTimer;
     private float horizontalInput;
+
+    private float jumpInputTimer;
+    [SerializeField] private float jumpCoyoteTimer;
 }
