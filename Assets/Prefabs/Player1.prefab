@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 63421804993891461}
   - component: {fileID: 6047793383663831590}
   - component: {fileID: 4528627138221035993}
+  - component: {fileID: 2246367280772677266}
   m_Layer: 7
   m_Name: Player1
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b382e2f322051b84d8e86b1fb0042d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityScript: {fileID: 2246367280772677266}
   feet: {fileID: 8642514575319511817}
   maxRunSpeed: 5
   accelRate: 1
@@ -180,6 +182,18 @@ MonoBehaviour:
   jumpForce: 5
   coyoteTime: 0
   jumpCoyoteTimer: 0
+--- !u!114 &2246367280772677266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772283523003243736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a916ef601fc88af4b84d54ec45f1bc3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6248415920360917350
 GameObject:
   m_ObjectHideFlags: 0

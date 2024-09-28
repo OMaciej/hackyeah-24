@@ -52,6 +52,18 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.right * forceToApply, ForceMode2D.Impulse);
     }
 
+    private void OnEnable()
+    {
+        if(abilityScript != null)
+            abilityScript.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        if(abilityScript != null)
+            abilityScript.enabled = false;
+    }
+
     private void updateTimers()
     {
         jumpInputTimer -= Time.deltaTime;
@@ -90,6 +102,8 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
+
+    [SerializeField] private MonoBehaviour abilityScript;
 
     [SerializeField] private Transform feet;
 
