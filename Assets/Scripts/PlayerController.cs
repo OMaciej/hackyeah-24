@@ -70,6 +70,38 @@ public class PlayerController : MonoBehaviour
             abilityScript.enabled = false;
     }
 
+    public void OnCharacterSwitch(bool switchedTo)
+    {
+        if(tutorialToTrigger != null)
+        {
+            if(switchedTo)
+            {
+                tutorialToTrigger.enableTrigger();
+            } else
+            {
+                tutorialToTrigger.disableTrigger();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("TutorialTrigger"))
+        {
+            tutorialToTrigger = collision.GetComponent<TutorialTrigger>();
+            tutorialToTrigger.enableTrigger();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("TutorialTrigger"))
+        {
+            tutorialToTrigger.disableTrigger();
+            tutorialToTrigger = null;
+        }
+    }
+
     private void updateTimers()
     {
         jumpInputTimer -= Time.deltaTime;
@@ -123,6 +155,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInteract playerInteract;
 
     private Rigidbody2D rb;
+    private TutorialTrigger tutorialToTrigger;
 
     private float horizontalInput;
 
