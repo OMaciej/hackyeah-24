@@ -602,7 +602,7 @@ MonoBehaviour:
   maxRunSpeed: 5
   accelRate: 1
   deccelRate: 1
-  maxJumpInputDelay: 0
+  maxJumpInputDelay: 0.125
   jumpForce: 5
 --- !u!61 &1602325507
 BoxCollider2D:
