@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         playerInteract = GetComponent<PlayerInteract>();
 
         jumpInputTimer = 0f;
@@ -113,6 +114,12 @@ public class PlayerController : MonoBehaviour
         jumpCoyoteTimer = 0f;
         float targetJmpForce = (jumpForce - rb.velocity.y);
         rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
+
+        //Play jump sound effect
+        if(audioSource.clip == null || audioSource.clip.name != jumpSfx.name)
+            audioSource.clip = jumpSfx;
+
+        audioSource.Play();
     }
 
     private bool isGrounded()
@@ -152,9 +159,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float coyoteTime;
 
+    [SerializeField] private AudioClip jumpSfx;
+
     private PlayerInteract playerInteract;
 
     private Rigidbody2D rb;
+    private AudioSource audioSource;
+
     private TutorialTrigger tutorialToTrigger;
 
     private float horizontalInput;

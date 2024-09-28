@@ -15,7 +15,7 @@ public class TutorialTrigger : MonoBehaviour
         {
             HUD.instance.setTutorialText(textToDisplay);
             HUD.instance.setTutorialTextVisibility(true);
-            wasEnabled = true;
+            wasEnabled = true;  
         }
     }
 
