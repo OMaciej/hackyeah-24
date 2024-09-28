@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerInteract = GetComponent<PlayerInteract>();
 
         jumpInputTimer = 0f;
         jumpCoyoteTimer = 0f;
@@ -34,6 +35,11 @@ public class PlayerController : MonoBehaviour
         {
             jump();
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            playerInteract.clickButton();
+        }
     }
 
     private void FixedUpdate()
@@ -50,6 +56,50 @@ public class PlayerController : MonoBehaviour
         float forceToApply = (targetSpeed - rb.velocity.x) * accel;
 
         rb.AddForce(Vector2.right * forceToApply, ForceMode2D.Impulse);
+    }
+
+    private void OnEnable()
+    {
+        if(abilityScript != null)
+            abilityScript.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        if(abilityScript != null)
+            abilityScript.enabled = false;
+    }
+
+    public void OnCharacterSwitch(bool switchedTo)
+    {
+        if(tutorialToTrigger != null)
+        {
+            if(switchedTo)
+            {
+                tutorialToTrigger.enableTrigger();
+            } else
+            {
+                tutorialToTrigger.disableTrigger();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("TutorialTrigger"))
+        {
+            tutorialToTrigger = collision.GetComponent<TutorialTrigger>();
+            tutorialToTrigger.enableTrigger();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("TutorialTrigger"))
+        {
+            tutorialToTrigger.disableTrigger();
+            tutorialToTrigger = null;
+        }
     }
 
     private void updateTimers()
@@ -91,6 +141,8 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    [SerializeField] private MonoBehaviour abilityScript;
+
     [SerializeField] private Transform feet;
 
     [SerializeField] private float maxRunSpeed;
@@ -100,7 +152,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float coyoteTime;
 
+    private PlayerInteract playerInteract;
+
     private Rigidbody2D rb;
+    private TutorialTrigger tutorialToTrigger;
 
     private float horizontalInput;
 

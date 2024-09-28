@@ -3,6 +3,17 @@ using UnityEngine;
 
 public class PlayerSwitch : MonoBehaviour
 {
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
     {
         foreach(GameObject character in characters)
@@ -26,8 +37,17 @@ public class PlayerSwitch : MonoBehaviour
         for (int i = 0; i < characterControllers.Count; i++) {
             if (Input.GetKeyDown(switchKeyCodes[i]))
             {
+                if(i == currentCharacter)
+                {
+                    continue;
+                }
+
                 characterControllers[i].enabled = true;
                 characterControllers[currentCharacter].enabled = false;
+
+                characterControllers[currentCharacter].OnCharacterSwitch(false);
+                characterControllers[i].OnCharacterSwitch(true);
+
                 currentCharacter = i;
 
                 setCameraFocus(characters[i]);
@@ -43,6 +63,13 @@ public class PlayerSwitch : MonoBehaviour
             CameraFollower.instance.setFocusOnCharacter(character);
         }
     }
+
+    public GameObject getActivePlayer()
+    {
+        return characters[currentCharacter];
+    }
+
+    public static PlayerSwitch instance;
 
     [SerializeField] private GameObject[] characters;
 
