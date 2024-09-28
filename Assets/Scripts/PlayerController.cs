@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 
-public class CharacterController2D : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        jumpInputTimer = 0f;
     }
 
     private void Update()
@@ -17,11 +19,14 @@ public class CharacterController2D : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         isGrounded();
 
-        if(Input.GetButton("Jump") && isGrounded())
+        if(Input.GetButton("Jump"))
         {
-            float targetJmpForce = (jumpForce - rb.velocity.y);
+            jumpInputTimer = maxJumpInputDelay;
+        }
 
-            rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
+        if (jumpInputTimer >= 0f && isGrounded())
+        {
+            jump();
         }
     }
 
@@ -43,18 +48,19 @@ public class CharacterController2D : MonoBehaviour
 
     private void updateTimers()
     {
+        jumpInputTimer -= Time.deltaTime;
+    }
 
+    private void jump()
+    {
+        float targetJmpForce = (jumpForce - rb.velocity.y);
+        rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
     }
 
     private bool isGrounded()
     {
         int groundLayer = LayerMask.GetMask("Ground");
         RaycastHit2D hit2d = Physics2D.CircleCast(feet.position, 0.3f, Vector2.down, 0.1f, groundLayer);
-
-        if(hit2d.collider != null)
-        {
-            Debug.Log(hit2d.transform.name);
-        }
 
         return hit2d.collider != null;
     }
