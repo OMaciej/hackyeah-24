@@ -81,14 +81,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (abilityScript != null)
+        if (abilityScript != null) 
+        {
             abilityScript.enabled = true;
+            if(this.transform.GetChild(1).gameObject != null && this.transform.GetChild(1).gameObject.name == "GrapplingHook")
+            {
+                this.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+            
     }
 
     private void OnDisable()
     {
         if (abilityScript != null)
             abilityScript.enabled = false;
+            if(this.transform.GetChild(1).gameObject != null && this.transform.GetChild(1).gameObject.name == "GrapplingHook")
+            {
+                this.transform.GetChild(1).gameObject.SetActive(false);
+            }
     }
 
     public void OnCharacterSwitch(bool switchedTo)
