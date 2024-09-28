@@ -9,7 +9,7 @@ public class PlatformObjectController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GameObject platform = getPlatform();
+        platform = getPlatform();
     }
 
     private GameObject getPlatform()
@@ -25,7 +25,18 @@ public class PlatformObjectController : MonoBehaviour
         return null;
     }
 
+    public Vector2 getPlatformVelocity()
+    {
+        if (platform == null)
+        {
+            return Vector2.zero;
+        }
+
+        return platform.GetComponent<Rigidbody2D>().velocity;
+    }
+
     [SerializeField] private Transform feet;
 
     private Rigidbody2D rb;
+    private GameObject platform;
 }

@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
         jumpInputTimer = 0f;
         jumpCoyoteTimer = 0f;
+
+        platformObjectController = GetComponent<PlatformObjectController>();
     }
 
     private void Update()
@@ -68,9 +70,13 @@ public class PlayerController : MonoBehaviour
         }
 
         float forceToApply;
+
+        Vector2 platformVelocity = platformObjectController.getPlatformVelocity();
+
         forceToApply = (targetSpeed - rb.velocity.x) * accel;
 
-        rb.AddForce(Vector2.right * forceToApply, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.right * forceToApply + new Vector2(platformVelocity.x, 0f), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(0f, platformVelocity.y), ForceMode2D.Force);
     }
 
     private void OnEnable()
@@ -185,6 +191,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip jumpSfx;
 
     private PlayerInteract playerInteract;
+    private PlatformObjectController platformObjectController;
 
     private Rigidbody2D rb;
     private AudioSource audioSource;
