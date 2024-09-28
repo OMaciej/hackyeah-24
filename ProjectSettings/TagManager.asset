@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StrongLemur
   - PressurePlateTriggerCollider
+  - ButtonTriggerCollider
   layers:
   - Default
   - TransparentFX

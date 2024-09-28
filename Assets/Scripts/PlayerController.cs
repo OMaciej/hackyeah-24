@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerInteract = GetComponent<PlayerInteract>();
 
         jumpInputTimer = 0f;
         jumpCoyoteTimer = 0f;
@@ -33,6 +34,11 @@ public class PlayerController : MonoBehaviour
         else if (jumpInputTimer > 0f && grounded && rb.velocity.y <= 0f)
         {
             jump();
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            playerInteract.clickButton();
         }
     }
 
@@ -113,6 +119,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxJumpInputDelay;
     [SerializeField] private float jumpForce;
     [SerializeField] private float coyoteTime;
+
+    private PlayerInteract playerInteract;
 
     private Rigidbody2D rb;
 
