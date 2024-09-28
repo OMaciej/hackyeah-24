@@ -316,6 +316,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player4
       objectReference: {fileID: 0}
+    - target: {fileID: 5772283523003243736, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248415920360917350, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8642514575319511817, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.99
@@ -544,6 +552,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 5772283523003243736, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248415920360917350, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8642514575319511817, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.29
@@ -614,6 +630,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3
       objectReference: {fileID: 0}
+    - target: {fileID: 5772283523003243736, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248415920360917350, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -670,6 +694,14 @@ PrefabInstance:
     - target: {fileID: 5772283523003243736, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772283523003243736, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248415920360917350, guid: a8ca2a957dfb59441b15309803766a98, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

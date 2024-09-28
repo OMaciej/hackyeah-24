@@ -585,7 +585,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1602325506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +604,8 @@ MonoBehaviour:
   deccelRate: 1
   maxJumpInputDelay: 0.125
   jumpForce: 5
+  coyoteTime: 0.2
+  jumpCoyoteTimer: 0
 --- !u!61 &1602325507
 BoxCollider2D:
   m_ObjectHideFlags: 0
