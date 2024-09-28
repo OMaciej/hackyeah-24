@@ -21,7 +21,7 @@ public class SmoothMovement : MonoBehaviour
 
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
 
-        if(Vector2.Distance(pos, endPos) < 0.15f)
+        if(Vector2.Distance(pos, endPos) < 0.4f)
         {
             transform.position = new Vector3(endPos.x, endPos.y, transform.position.z);
             this.enabled = false;
