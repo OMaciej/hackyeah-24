@@ -90,6 +90,7 @@ public class GrapplingHook : MonoBehaviour
         if (ropeVec.magnitude <= maxRopeLen)
         {
             accelerationDirection = (Vector2)ropeVec.normalized;
+            // transform.parent.GetComponent<PlayerController>().blockMovement = true;
         }
         else
         {
@@ -104,6 +105,7 @@ public class GrapplingHook : MonoBehaviour
     {
         accelerationDirection = new Vector3(0, 0, 0);
         lineRenderer.enabled = false;
+        // transform.parent.GetComponent<PlayerController>().blockMovement = false;
     }
 
     // private bool GetAnchorPositionAtPointer(out Vector3 anchorPosition)

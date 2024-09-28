@@ -17,16 +17,19 @@ public class PlayerController : MonoBehaviour
         updateTimers();
         bool grounded = isGrounded();
 
+        // if (grounded)
+        //     blockMovement = false;
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        if(grounded && rb.velocity.y <= 0f)
+        if (grounded && rb.velocity.y <= 0f)
         {
             jumpCoyoteTimer = coyoteTime;
-        } 
+        }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(grounded || (jumpCoyoteTimer > 0f && rb.velocity.y <= 0f))
+            if (grounded || (jumpCoyoteTimer > 0f && rb.velocity.y <= 0f))
             {
                 jump();
             }
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
             jump();
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             playerInteract.clickButton();
         }
@@ -45,43 +48,52 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isGrounded())
-            return;
+        // if (blockMovement)
+        //     return;
 
         float targetSpeed = maxRunSpeed * horizontalInput;
 
         float accel = accelRate;
 
-        if(Mathf.Abs(targetSpeed) < 0.1f)
+        if (Mathf.Abs(targetSpeed) < 0.1f)
         {
-            accel = deccelRate;
+            if (isGrounded())
+            {
+                accel = deccelRate;
+            }
+            else
+            {
+                accel = 0;
+            }
         }
 
-        float forceToApply = (targetSpeed - rb.velocity.x) * accel;
+        float forceToApply;
+        forceToApply = (targetSpeed - rb.velocity.x) * accel;
 
         rb.AddForce(Vector2.right * forceToApply, ForceMode2D.Impulse);
     }
 
     private void OnEnable()
     {
-        if(abilityScript != null)
+        if (abilityScript != null)
             abilityScript.enabled = true;
     }
 
     private void OnDisable()
     {
-        if(abilityScript != null)
+        if (abilityScript != null)
             abilityScript.enabled = false;
     }
 
     public void OnCharacterSwitch(bool switchedTo)
     {
-        if(tutorialToTrigger != null)
+        if (tutorialToTrigger != null)
         {
-            if(switchedTo)
+            if (switchedTo)
             {
                 tutorialToTrigger.enableTrigger();
-            } else
+            }
+            else
             {
                 tutorialToTrigger.disableTrigger();
             }
@@ -90,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("TutorialTrigger"))
+        if (collision.CompareTag("TutorialTrigger"))
         {
             tutorialToTrigger = collision.GetComponent<TutorialTrigger>();
             tutorialToTrigger.enableTrigger();
@@ -99,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("TutorialTrigger"))
+        if (collision.CompareTag("TutorialTrigger"))
         {
             tutorialToTrigger.disableTrigger();
             tutorialToTrigger = null;
@@ -119,7 +131,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
 
         //Play jump sound effect
-        if(audioSource.clip == null || audioSource.clip.name != jumpSfx.name)
+        if (audioSource.clip == null || audioSource.clip.name != jumpSfx.name)
             audioSource.clip = jumpSfx;
 
         audioSource.Play();
@@ -131,7 +143,7 @@ public class PlayerController : MonoBehaviour
         int groundLayer = LayerMask.GetMask("Ground");
         RaycastHit2D hit2d = Physics2D.CircleCast(feet.position, 0.3f, Vector2.down, 0.1f, groundLayer);
 
-        if(hit2d.collider != null)
+        if (hit2d.collider != null)
         {
             return true;
         }
@@ -140,9 +152,9 @@ public class PlayerController : MonoBehaviour
         int characterLayer = LayerMask.GetMask("Character");
         RaycastHit2D[] hits2d = Physics2D.CircleCastAll(feet.position, 0.3f, Vector2.down, 0.1f, characterLayer);
 
-        foreach(RaycastHit2D hit in hits2d)
+        foreach (RaycastHit2D hit in hits2d)
         {
-            if(hit.transform.GetInstanceID() != transform.GetInstanceID())
+            if (hit.transform.GetInstanceID() != transform.GetInstanceID())
             {
                 return true;
             }
@@ -175,4 +187,5 @@ public class PlayerController : MonoBehaviour
 
     private float jumpInputTimer;
     [SerializeField] private float jumpCoyoteTimer;
+    // public bool blockMovement = false;
 }
