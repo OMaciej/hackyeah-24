@@ -1,8 +1,4 @@
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,7 +22,7 @@ public class PlayerController : MonoBehaviour
             jumpCoyoteTimer = coyoteTime;
         } 
 
-        if(Input.GetButton("Jump"))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             if(grounded || (jumpCoyoteTimer > 0f && rb.velocity.y <= 0f))
             {
@@ -71,10 +67,28 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
+        //Check for collision with ground
         int groundLayer = LayerMask.GetMask("Ground");
         RaycastHit2D hit2d = Physics2D.CircleCast(feet.position, 0.3f, Vector2.down, 0.1f, groundLayer);
 
-        return hit2d.collider != null;
+        if(hit2d.collider != null)
+        {
+            return true;
+        }
+
+        //Check for collision with other controllable characters (players)
+        int characterLayer = LayerMask.GetMask("Character");
+        RaycastHit2D[] hits2d = Physics2D.CircleCastAll(feet.position, 0.3f, Vector2.down, 0.1f, characterLayer);
+
+        foreach(RaycastHit2D hit in hits2d)
+        {
+            if(hit.transform.GetInstanceID() != transform.GetInstanceID())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     [SerializeField] private Transform feet;
