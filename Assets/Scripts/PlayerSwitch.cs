@@ -17,6 +17,8 @@ public class PlayerSwitch : MonoBehaviour
         }
 
         characterControllers[0].enabled = true;
+
+        setCameraFocus(characters[0]);
     }
 
     private void Update()
