@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
             jumpCoyoteTimer = coyoteTime;
         } 
 
-        if(Input.GetButton("Jump"))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             if(grounded || (jumpCoyoteTimer > 0f && rb.velocity.y <= 0f))
             {
