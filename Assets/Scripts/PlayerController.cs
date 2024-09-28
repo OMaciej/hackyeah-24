@@ -133,6 +133,14 @@ public class PlayerController : MonoBehaviour
             return true;
         }
 
+        groundLayer = LayerMask.GetMask("MovingPlatform");
+        hit2d = Physics2D.CircleCast(feet.position, 0.3f, Vector2.down, 0.1f, groundLayer);
+
+        if (hit2d.collider != null)
+        {
+            return true;
+        }
+
         //Check for collision with other controllable characters (players)
         int characterLayer = LayerMask.GetMask("Character");
         RaycastHit2D[] hits2d = Physics2D.CircleCastAll(feet.position, 0.3f, Vector2.down, 0.1f, characterLayer);
