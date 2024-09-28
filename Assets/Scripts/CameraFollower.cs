@@ -14,18 +14,27 @@ public class CameraFollower : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        sMovement = GetComponent<SmoothMovement>();
+    }
+
     private void Update()
     {
-        transform.position = new Vector3(
-            Mathf.Min(Mathf.Max(characterTransform.position.x, bottomLeftCorner.position.x), topRightCorner.position.x),
-            Mathf.Min(Mathf.Max(characterTransform.position.y, bottomLeftCorner.position.y), topRightCorner.position.y),
-            -5f
-            );
+        if (!sMovement.enabled)
+        {
+            transform.position = new Vector3(
+                Mathf.Min(Mathf.Max(characterTransform.position.x, bottomLeftCorner.position.x), topRightCorner.position.x),
+                Mathf.Min(Mathf.Max(characterTransform.position.y, bottomLeftCorner.position.y), topRightCorner.position.y),
+                -5f
+                );
+        }
     }
 
     public void setFocusOnCharacter(GameObject character)
     {
         characterTransform = character.transform;
+        sMovement.move(characterTransform.position, switchAnimationSpeed);
     }
 
     public static CameraFollower instance;
@@ -36,4 +45,7 @@ public class CameraFollower : MonoBehaviour
     //they need to be set manually for each level
     [SerializeField] private Transform bottomLeftCorner;
     [SerializeField] private Transform topRightCorner;
+    [SerializeField] private float switchAnimationSpeed;
+
+    private SmoothMovement sMovement;
 }
