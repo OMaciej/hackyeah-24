@@ -1,8 +1,4 @@
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,20 +7,30 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         jumpInputTimer = 0f;
+        jumpCoyoteTimer = 0f;
     }
 
     private void Update()
     {
         updateTimers();
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        isGrounded();
+        bool grounded = isGrounded();
 
-        if(Input.GetButton("Jump"))
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        if(grounded && rb.velocity.y <= 0f)
         {
-            jumpInputTimer = maxJumpInputDelay;
+            jumpCoyoteTimer = coyoteTime;
+        } 
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(grounded || (jumpCoyoteTimer > 0f && rb.velocity.y <= 0f))
+            {
+                jump();
+            }
         }
 
-        if (jumpInputTimer >= 0f && isGrounded())
+        else if (jumpInputTimer > 0f && grounded && rb.velocity.y <= 0f)
         {
             jump();
         }
@@ -49,20 +55,40 @@ public class PlayerController : MonoBehaviour
     private void updateTimers()
     {
         jumpInputTimer -= Time.deltaTime;
+        jumpCoyoteTimer -= Time.deltaTime;
     }
 
     private void jump()
     {
+        jumpCoyoteTimer = 0f;
         float targetJmpForce = (jumpForce - rb.velocity.y);
         rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
     }
 
     private bool isGrounded()
     {
+        //Check for collision with ground
         int groundLayer = LayerMask.GetMask("Ground");
         RaycastHit2D hit2d = Physics2D.CircleCast(feet.position, 0.3f, Vector2.down, 0.1f, groundLayer);
 
-        return hit2d.collider != null;
+        if(hit2d.collider != null)
+        {
+            return true;
+        }
+
+        //Check for collision with other controllable characters (players)
+        int characterLayer = LayerMask.GetMask("Character");
+        RaycastHit2D[] hits2d = Physics2D.CircleCastAll(feet.position, 0.3f, Vector2.down, 0.1f, characterLayer);
+
+        foreach(RaycastHit2D hit in hits2d)
+        {
+            if(hit.transform.GetInstanceID() != transform.GetInstanceID())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     [SerializeField] private Transform feet;
@@ -72,9 +98,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float deccelRate;
     [SerializeField] private float maxJumpInputDelay;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float coyoteTime;
 
     private Rigidbody2D rb;
 
-    private float jumpInputTimer;
     private float horizontalInput;
+
+    private float jumpInputTimer;
+    [SerializeField] private float jumpCoyoteTimer;
 }
