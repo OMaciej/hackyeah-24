@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 63421804993891461}
   - component: {fileID: 6047793383663831590}
   - component: {fileID: 4528627138221035993}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,6 +178,8 @@ MonoBehaviour:
   deccelRate: 1
   maxJumpInputDelay: 0
   jumpForce: 5
+  coyoteTime: 0
+  jumpCoyoteTimer: 0
 --- !u!1 &6248415920360917350
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8642514575319511817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
