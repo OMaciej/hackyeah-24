@@ -1,69 +1,35 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSwitch : MonoBehaviour
 {
-
-    [SerializeField] private GameObject player1;
-    [SerializeField] private GameObject player2;
-    [SerializeField] private GameObject player3;
-    [SerializeField] private GameObject player4;
-
-    private PlayerController pc1;
-    private PlayerController pc2;
-    private PlayerController pc3;
-    private PlayerController pc4;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        pc1 = player1.GetComponent<PlayerController>();
-        pc2 = player2.GetComponent<PlayerController>();
-        pc3 = player3.GetComponent<PlayerController>();
-        pc4 = player4.GetComponent<PlayerController>();
+        foreach(GameObject character in characters)
+        {
+            characterControllers.Add(character.GetComponent<PlayerController>());
+        }
 
+        currentCharacter = 0;
 
-        pc1.enabled = true;
-        pc2.enabled = false;
-        pc3.enabled = false;
-        pc4.enabled = false;
+        foreach(PlayerController pc in characterControllers) {
+            pc.enabled = false;
+        }
 
-        setCameraFocus(player1);
+        characterControllers[0].enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(Input.GetKeyDown("1")) {
-            pc1.enabled = true;
-            pc2.enabled = false;
-            pc3.enabled = false;
-            pc4.enabled = false;
+        for (int i = 0; i < characterControllers.Count; i++) {
+            if (Input.GetKeyDown(switchKeyCodes[i]))
+            {
+                characterControllers[i].enabled = true;
+                characterControllers[currentCharacter].enabled = false;
+                currentCharacter = i;
 
-            setCameraFocus(player1);
-        }
-        if(Input.GetKeyDown("2")) {
-            pc1.enabled = false;
-            pc2.enabled = true;
-            pc3.enabled = false;
-            pc4.enabled = false;
-
-            setCameraFocus(player2);
-        }
-        if(Input.GetKeyDown("3")) {
-            pc1.enabled = false;
-            pc2.enabled = false;
-            pc3.enabled = true;
-            pc4.enabled = false;
-
-            setCameraFocus(player3);
-        }
-        if(Input.GetKeyDown("4")) {
-            pc1.enabled = false;
-            pc2.enabled = false;
-            pc3.enabled = false;
-            pc4.enabled = true;
-
-            setCameraFocus(player4);
+                setCameraFocus(characters[i]);
+            }
         }
     }
 
@@ -75,4 +41,26 @@ public class PlayerSwitch : MonoBehaviour
             CameraFollower.instance.setFocusOnCharacter(character);
         }
     }
+
+    [SerializeField] private GameObject[] characters;
+
+    [SerializeField] private List<PlayerController> characterControllers;
+
+    //the id of the character we're currently controlling
+    private int currentCharacter;
+
+    //the keys that will be used to switch to a given character
+    private KeyCode[] switchKeyCodes =
+    {
+        KeyCode.Alpha1,
+        KeyCode.Alpha2,
+        KeyCode.Alpha3,
+        KeyCode.Alpha4,
+        KeyCode.Alpha5,
+        KeyCode.Alpha6,
+        KeyCode.Alpha7,
+        KeyCode.Alpha8,
+        KeyCode.Alpha9,
+        KeyCode.Alpha0
+    };
 }
