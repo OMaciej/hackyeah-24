@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSwitch : MonoBehaviour
 {
-
-    //[SerializeField] private bool isPlayer1On;
-    //[SerializeField] private bool isPlayer2On;
 
     [SerializeField] private GameObject player1;
     [SerializeField] private GameObject player2;
@@ -31,6 +26,8 @@ public class PlayerSwitch : MonoBehaviour
         pc2.enabled = false;
         pc3.enabled = false;
         pc4.enabled = false;
+
+        setCameraFocus(player1);
     }
 
     // Update is called once per frame
@@ -41,24 +38,41 @@ public class PlayerSwitch : MonoBehaviour
             pc2.enabled = false;
             pc3.enabled = false;
             pc4.enabled = false;
+
+            setCameraFocus(player1);
         }
         if(Input.GetKeyDown("2")) {
             pc1.enabled = false;
             pc2.enabled = true;
             pc3.enabled = false;
             pc4.enabled = false;
+
+            setCameraFocus(player2);
         }
         if(Input.GetKeyDown("3")) {
             pc1.enabled = false;
             pc2.enabled = false;
             pc3.enabled = true;
             pc4.enabled = false;
+
+            setCameraFocus(player3);
         }
         if(Input.GetKeyDown("4")) {
             pc1.enabled = false;
             pc2.enabled = false;
             pc3.enabled = false;
             pc4.enabled = true;
+
+            setCameraFocus(player4);
+        }
+    }
+
+    private void setCameraFocus(GameObject character)
+    {
+        //some levels may be using a static camera, so check if a CameraFollower exists
+        if(CameraFollower.instance != null)
+        {
+            CameraFollower.instance.setFocusOnCharacter(character);
         }
     }
 }
