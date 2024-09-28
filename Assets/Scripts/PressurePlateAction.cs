@@ -18,10 +18,7 @@ public class PressurePlateAction : MonoBehaviour {
   public Action onExitAction;
 
   bool isAllowedToPress(Collider2D other) {
-    int characterLayer = LayerMask.NameToLayer("Character");
-    int movableObjectLayer = LayerMask.NameToLayer("MovableObject");
-    return other.gameObject.layer == characterLayer
-        || other.gameObject.layer == movableObjectLayer;
+    return other.GetComponent<CanPressPressurePlate>() != null;
   }
 
   // This function is called every time another collider overlaps the trigger collider
