@@ -12,6 +12,7 @@ public class CameraFollower : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
