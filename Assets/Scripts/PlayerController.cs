@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isGrounded())
+            return;
+
         float targetSpeed = maxRunSpeed * horizontalInput;
 
         float accel = accelRate;

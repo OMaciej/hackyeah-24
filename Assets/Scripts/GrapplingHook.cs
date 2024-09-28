@@ -8,6 +8,7 @@ public class GrapplingHook : MonoBehaviour
     private GameObject player;
     public float acceleration;
     public float maxSpeed;
+    public float maxRopeLen;
     private Transform playerTransform;
     private Rigidbody2D rb;
 
@@ -43,41 +44,113 @@ public class GrapplingHook : MonoBehaviour
         // lineRenderer.positionCount = 2;
 
         // Define the start and end positions
-        Vector3 playerPosition = playerTransform.position;
-        Vector3 pointerPosition = GetPointerPosition();
-        Vector3 startPosition = playerPosition;
-        Vector3 endPosition = pointerPosition;
+        Vector3 startPosition = playerTransform.position;
 
         // Set the positions in the LineRenderer
         lineRenderer.SetPosition(0, startPosition);
-        lineRenderer.SetPosition(1, endPosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (GetClickedAnchorPosition(out Vector3 anchorPosition))
         {
-            OnLeftMouseClick();
+            TryToGrabPoint(anchorPosition);
         }
-        if (Input.GetMouseButtonUp(0))
+        else
         {
-            OnLeftMouseRelease();
+            Unbrab();
         }
+
+        // if (Input.GetMouseButton(0))
+        // {
+        //     OnLeftMouseClick();
+        // }
+        // else
+        // {
+        //     OnLeftMouseRelease();
+        // }
     }
 
     Vector2 accelerationDirection;
 
-    void OnLeftMouseClick()
+    private bool GetClickedAnchorPosition(out Vector3 anchorPosition)
     {
-        Debug.Log("Mouse clicked");
-        Vector3 playerPosition = playerTransform.position;
-        Vector3 pointerPosition = GetPointerPosition();
-        accelerationDirection = (Vector2)(pointerPosition - playerPosition);
-        accelerationDirection.Normalize();
-        Debug.Log(accelerationDirection);
+        anchorPosition = Vector3.zero;
+        GameObject clickedAnchor = ClickableAnchor.clickedObject;
+        if (clickedAnchor != null)
+        {
+            anchorPosition = clickedAnchor.transform.position;
+            return true;
+        }
+        return false;
     }
-    void OnLeftMouseRelease()
+
+    private void TryToGrabPoint(Vector3 pointPosition)
     {
-        Debug.Log("Mouse released");
+        Vector3 begRope = playerTransform.position;
+        Vector3 endRope = pointPosition;
+        Vector3 ropeVec = endRope - begRope;
+        if (ropeVec.magnitude <= maxRopeLen)
+        {
+            accelerationDirection = (Vector2)ropeVec.normalized;
+        }
+        else
+        {
+            accelerationDirection = new Vector2(0, 0);
+            endRope = begRope + ropeVec.normalized * maxRopeLen;
+        }
+        lineRenderer.SetPosition(1, endRope);
+        lineRenderer.enabled = true;
+    }
+
+    private void Unbrab()
+    {
         accelerationDirection = new Vector3(0, 0, 0);
+        lineRenderer.enabled = false;
     }
+
+    // private bool GetAnchorPositionAtPointer(out Vector3 anchorPosition)
+    // {
+    //     anchorPosition = Vector3.zero;
+
+    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+    //     // Perform the raycast
+    //     if (Physics.Raycast(ray, out RaycastHit hit))
+    //     {
+    //         Debug.Log("Ray hit some object I guess");
+    //         // Check if the hit object has a BoxCollider and is this GameObject
+    //         if (hit.collider != null)
+    //         {
+    //             Debug.Log("Ray hit some object with a collider");
+
+    //             GameObject anchorGameObject = hit.collider.gameObject;
+    //             if (anchorGameObject.GetComponent<CanBeAnchor>())
+    //             {
+    //                 anchorPosition = anchorGameObject.transform.position;
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // void OnLeftMouseClick()
+    // {
+    //     Debug.Log("Mouse clicked");
+    //     if (GetAnchorPositionAtPointer(out Vector3 anchorPosition))
+    //     {
+    //         Debug.Log("Clicked anchor");
+    //         Vector3 begRope = playerTransform.position;
+    //         Vector3 endRope = anchorPosition;
+    //         accelerationDirection = (Vector2)(endRope - begRope);
+    //         accelerationDirection.Normalize();
+    //         Debug.Log(accelerationDirection);
+    //         lineRenderer.SetPosition(1, endRope);
+    //     }
+    // }
+    // void OnLeftMouseRelease()
+    // {
+    //     // Debug.Log("Mouse released");
+    //     accelerationDirection = new Vector3(0, 0, 0);
+    // }
 
     void FixedUpdate()
     {
@@ -91,6 +164,9 @@ public class GrapplingHook : MonoBehaviour
 
             Debug.Log(accelerationDirection);
             Debug.Log(rb.velocity);
+        }
+        else
+        {
         }
 
         // rb.AddForce(Vector2.right * 100f, ForceMode2D.Impulse);
