@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResetGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static ResetGame instance;
+    // Start is called before the first frame update
+    void Awake() 
+        {
+                if(instance == null)
+            {
+                instance = this;
+            } else
+            {
+                Destroy(gameObject);
+            }
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+    void Update() 
+        {
+            if (Input.GetKeyDown(KeyCode.R)) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
 }
+

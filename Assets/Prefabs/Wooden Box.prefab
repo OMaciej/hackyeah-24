@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4433900137740911853}
   - component: {fileID: 3747088616715939412}
   - component: {fileID: 842451591002353141}
-  m_Layer: 0
+  - component: {fileID: 9117175022896618148}
+  m_Layer: 6
   m_Name: Wooden Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,3 +159,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &9117175022896618148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878097268242952969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7416cfe54a1982ab2970312e34566742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
