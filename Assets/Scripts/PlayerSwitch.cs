@@ -26,6 +26,10 @@ public class PlayerSwitch : MonoBehaviour
         for (int i = 0; i < characterControllers.Count; i++) {
             if (Input.GetKeyDown(switchKeyCodes[i]))
             {
+                if(i == currentCharacter)
+                {
+                    continue;
+                }
                 characterControllers[i].enabled = true;
                 characterControllers[currentCharacter].enabled = false;
                 currentCharacter = i;
