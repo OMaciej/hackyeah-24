@@ -149,7 +149,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 953f0113c71f23640b2bb5fd5b13256f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -178,6 +178,8 @@ MonoBehaviour:
   deccelRate: 1
   maxJumpInputDelay: 0
   jumpForce: 5
+  coyoteTime: 0
+  jumpCoyoteTimer: 0
 --- !u!1 &6248415920360917350
 GameObject:
   m_ObjectHideFlags: 0
