@@ -15,6 +15,7 @@ public class CharacterController2D : MonoBehaviour
     {
         updateTimers();
         horizontalInput = Input.GetAxisRaw("Horizontal");
+        isGrounded();
 
         if(Input.GetButton("Jump") && isGrounded())
         {
@@ -47,10 +48,18 @@ public class CharacterController2D : MonoBehaviour
 
     private bool isGrounded()
     {
-        RaycastHit2D hit2d = Physics2D.Raycast(transform.position, Vector2.down, 5f);
+        int groundLayer = LayerMask.GetMask("Ground");
+        RaycastHit2D hit2d = Physics2D.CircleCast(feet.position, 0.3f, Vector2.down, 0.1f, groundLayer);
+
+        if(hit2d.collider != null)
+        {
+            Debug.Log(hit2d.transform.name);
+        }
 
         return hit2d.collider != null;
     }
+
+    [SerializeField] private Transform feet;
 
     [SerializeField] private float maxRunSpeed;
     [SerializeField] private float accelRate;
