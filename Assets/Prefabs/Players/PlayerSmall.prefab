@@ -169,9 +169,9 @@ MonoBehaviour:
   accelRate: 1
   deccelRate: 1
   maxJumpInputDelay: 0.15
-  jumpForce: 8
+  jumpForce: 10
   coyoteTime: 0.2
-  fallAccel: 1.4
+  fallingGravityScale: 1.25
   jumpSfx: {fileID: 8300000, guid: 1769aea40cfd08d49b0d7ea7f9395dc9, type: 3}
   jumpCoyoteTimer: 0
 --- !u!114 &3446301344904639567
