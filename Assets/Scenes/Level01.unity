@@ -1531,18 +1531,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2022015005495168041, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
-      propertyPath: maxSpeed
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022015005495168041, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
-      propertyPath: maxRopeLen
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022015005495168041, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
-      propertyPath: acceleration
-      value: 70
-      objectReference: {fileID: 0}
     - target: {fileID: 4049819017221541507, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
       propertyPath: m_Name
       value: Player3
