@@ -89,7 +89,8 @@ public class PlayerController : MonoBehaviour
                 this.transform.GetChild(1).gameObject.SetActive(true);
             }
         }
-            
+
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void OnDisable()
@@ -100,6 +101,9 @@ public class PlayerController : MonoBehaviour
             {
                 this.transform.GetChild(1).gameObject.SetActive(false);
             }
+
+        rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void OnCharacterSwitch(bool switchedTo)

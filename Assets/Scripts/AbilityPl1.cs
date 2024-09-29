@@ -18,7 +18,7 @@ public class AbilityPl1 : MonoBehaviour
     {
         if (Input.GetKeyDown("q"))
         {
-            rb.transform.localScale = new UnityEngine.Vector3(3f, 3f, 0);
+            rb.transform.localScale = new UnityEngine.Vector3(2f, 2f, 0);
             rb.tag = "StrongLemur";
 
         }
