@@ -12,11 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/KopciuchTest.unity
     guid: 241ed0e3d05575f45896378201bcca73
   - enabled: 1
-    path: Assets/Scenes/FinishedGame.unity
-    guid: 20cb8afff0ec45a3dbf801e6a018d473
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9c06f24ab1b0135bfadd1ee7c34a84d9
   - enabled: 1
     path: Assets/Scenes/Level01.unity
     guid: 64e7d46ee8fff954babd4911ffd55fd5
+  - enabled: 1
+    path: Assets/Scenes/Level02.unity
+    guid: 09ff78f6fd4993e478b1565e2a99ac5d
+  - enabled: 1
+    path: Assets/Scenes/FinishedGame.unity
+    guid: 20cb8afff0ec45a3dbf801e6a018d473
   - enabled: 0
     path: Assets/Scenes/TitleScreen.unity
     guid: 47102c21545dc4a489103053891dae52
