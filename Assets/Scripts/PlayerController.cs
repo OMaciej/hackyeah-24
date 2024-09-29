@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         playerInteract = GetComponent<PlayerInteract>();
 
         jumpInputTimer = 0f;
@@ -77,6 +78,27 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(Vector2.right * forceToApply + new Vector2(platformVelocity.x, 0f), ForceMode2D.Impulse);
         rb.AddForce(new Vector2(0f, platformVelocity.y), ForceMode2D.Force);
+
+        if (rb.velocity == Vector2.zero)
+        {
+            anim.SetBool("Idle", true);
+            anim.SetBool("Jump", false);
+
+        }
+        else if (rb.velocity.x > 0)
+        {
+            anim.SetBool("Idle", false);
+            anim.SetBool("Jump", false);
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        }
+        else if (rb.velocity.x < 0)
+        {
+            anim.SetBool("Idle", false);
+            anim.SetBool("Jump", false);
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        }
     }
 
     private void OnEnable()
@@ -143,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
     private void jump()
     {
+        anim.SetBool("Jump", true);
         jumpCoyoteTimer = 0f;
         float targetJmpForce = (jumpForce - rb.velocity.y);
         rb.AddForce(Vector2.up * targetJmpForce, ForceMode2D.Impulse);
@@ -193,6 +216,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform feet;
 
     [SerializeField] private float maxRunSpeed;
+    [SerializeField] private float speed;
     [SerializeField] private float accelRate;
     [SerializeField] private float deccelRate;
     [SerializeField] private float maxJumpInputDelay;
@@ -206,6 +230,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private AudioSource audioSource;
+    public Animator anim;
 
     private TutorialTrigger tutorialToTrigger;
 
