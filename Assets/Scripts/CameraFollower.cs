@@ -35,7 +35,14 @@ public class CameraFollower : MonoBehaviour
     public void setFocusOnCharacter(GameObject character)
     {
         characterTransform = character.transform;
-        sMovement.move(characterTransform.position, switchAnimationSpeed);
+        float switchSpeed = switchAnimationSpeed;
+
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(character.transform.position.x, character.transform.position.y)) < 10f)
+        {
+            switchSpeed /= 2f;
+        }
+
+        sMovement.move(characterTransform.position, switchSpeed);
     }
 
     public static CameraFollower instance;

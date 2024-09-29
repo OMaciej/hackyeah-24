@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         playerInteract = GetComponent<PlayerInteract>();
+        animator = GetComponent<Animator>();
 
         jumpInputTimer = 0f;
         jumpCoyoteTimer = 0f;
@@ -23,6 +24,20 @@ public class PlayerController : MonoBehaviour
         //     blockMovement = false;
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        animator.SetFloat("HorizontalInput", Mathf.Abs(horizontalInput));
+        animator.SetBool("Grounded", grounded);
+        animator.SetFloat("YVelocity", rb.velocity.y);
+
+        if(horizontalInput < 0f && transform.localScale.x > 0f)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y);
+        }
+
+        else if(horizontalInput > 0f && transform.localScale.x < 0f)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y);
+        }
 
         if (grounded && rb.velocity.y <= 0f)
         {
@@ -155,6 +170,7 @@ public class PlayerController : MonoBehaviour
         if (audioSource.clip == null || audioSource.clip.name != jumpSfx.name)
             audioSource.clip = jumpSfx;
 
+        animator.SetTrigger("Jump");
         audioSource.Play();
     }
 
@@ -210,6 +226,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private AudioSource audioSource;
+    private Animator animator;
 
     private TutorialTrigger tutorialToTrigger;
 
