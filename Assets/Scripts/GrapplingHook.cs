@@ -5,10 +5,15 @@ using UnityEngine.Assertions;
 
 public class GrapplingHook : MonoBehaviour
 {
-    private GameObject player;
     public float acceleration;
     public float maxSpeed;
     public float maxRopeLen;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip grapplingHookSfx;
+
+    private GameObject player;
+
     private Transform playerTransform;
     private Rigidbody2D rb;
 
@@ -91,6 +96,9 @@ public class GrapplingHook : MonoBehaviour
         {
             accelerationDirection = (Vector2)ropeVec.normalized;
             // transform.parent.GetComponent<PlayerController>().blockMovement = true;
+
+            audioSource.clip = grapplingHookSfx;
+            audioSource.Play();
         }
         else
         {
@@ -163,9 +171,6 @@ public class GrapplingHook : MonoBehaviour
 
             // Clamp the velocity to the maximum speed
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
-
-            Debug.Log(accelerationDirection);
-            Debug.Log(rb.velocity);
         }
         else
         {
