@@ -15,6 +15,7 @@ public class ButtonAction : MonoBehaviour
     private void Start()
     {
         toggled = false;
+        spriteRenderer.sprite = offSprite;
     }
 
     public void ClickButton()
