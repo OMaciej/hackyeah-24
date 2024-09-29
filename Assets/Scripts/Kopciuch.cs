@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Kopciuch : MonoBehaviour
 {
-    public SceneAsset nextScene;
 
     bool isPlayer(Collider2D other)
     {
@@ -15,6 +13,6 @@ public class Kopciuch : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isPlayer(collision))
-            SceneManager.LoadScene(nextScene.name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
