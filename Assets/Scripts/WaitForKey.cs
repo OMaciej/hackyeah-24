@@ -7,7 +7,9 @@ public class WaitForKey : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            SceneManager.LoadScene("Level01");
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
+
+    [SerializeField] private string sceneToLoad;
 }

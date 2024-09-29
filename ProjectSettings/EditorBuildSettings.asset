@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototype.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/KopciuchTest.unity
     guid: 241ed0e3d05575f45896378201bcca73
   - enabled: 1
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level01.unity
     guid: 64e7d46ee8fff954babd4911ffd55fd5
+  - enabled: 0
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 47102c21545dc4a489103053891dae52
   m_configObjects: {}

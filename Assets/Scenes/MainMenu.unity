@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83c81b87505c462f97215689c5afcc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: Level01
 --- !u!4 &585544670
 Transform:
   m_ObjectHideFlags: 0
@@ -946,10 +947,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 961155117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1204, y: -1118}
-  m_SizeDelta: {x: -42.433, y: 144.289}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 331.80005, y: 21}
+  m_SizeDelta: {x: 1796.005, y: 169.77698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1490439176
 MonoBehaviour:
@@ -1034,7 +1035,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 1238.5304, w: 0}
+  m_margin: {x: -225.72455, y: 44.086864, z: 1238.5304, w: 79.0283}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
