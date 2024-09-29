@@ -20,14 +20,16 @@ public class PlayerController : MonoBehaviour
         updateTimers();
         bool grounded = isGrounded();
 
-        // if (grounded)
-        //     blockMovement = false;
-
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         animator.SetFloat("HorizontalInput", Mathf.Abs(horizontalInput));
         animator.SetBool("Grounded", grounded);
         animator.SetFloat("YVelocity", rb.velocity.y);
+
+        if(rb.velocity.y < 0f)
+        {
+            rb.gravityScale = fallingGravityScale;
+        }
 
         if(horizontalInput < 0f && transform.localScale.x > 0f)
         {
@@ -82,11 +84,6 @@ public class PlayerController : MonoBehaviour
             {
                 accel = 0;
             }
-        }
-
-        if(isGrounded() && rb.velocity.y < 0f)
-        {
-            rb.AddForce(Vector2.down * fallAccel, ForceMode2D.Force);
         }
 
         float forceToApply;
@@ -224,7 +221,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float coyoteTime;
 
-    [SerializeField] private float fallAccel;
+    [SerializeField] private float fallingGravityScale;
 
     [SerializeField] private AudioClip jumpSfx;
 
