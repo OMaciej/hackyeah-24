@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (abilityScript != null) 
         {
             abilityScript.enabled = true;
-            if(this.gameObject.name == "Player3")
+            if(this.gameObject.name == "PlayerGrappler")
             {
                 this.transform.GetChild(1).gameObject.SetActive(true);
             }
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     {
         if (abilityScript != null)
             abilityScript.enabled = false;
-            if(this.gameObject.name == "Player3")
+            if(this.gameObject.name == "PlayerGrappler")
             {
                 this.transform.GetChild(1).gameObject.SetActive(false);
             }
