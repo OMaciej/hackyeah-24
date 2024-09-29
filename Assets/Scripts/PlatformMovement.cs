@@ -24,7 +24,12 @@ public class PlatformMovement : MonoBehaviour
         Vector2 direction = endPos.position - startPos.position;
         direction.Normalize();
 
-        rb.velocity = direction * movementSpeed * Time.deltaTime;
+        rb.velocity = direction * movementSpeed * Time.fixedDeltaTime;
+    }
+
+    private void OnDisable()
+    {
+        rb.velocity = Vector2.zero;
     }
 
     [SerializeField] private Transform endPos;

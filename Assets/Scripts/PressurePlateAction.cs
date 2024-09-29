@@ -24,16 +24,12 @@ public class PressurePlateAction : MonoBehaviour {
   // This function is called every time another collider overlaps the trigger collider
   void OnTriggerEnter2D (Collider2D other){
     if (isAllowedToPress(other)) {
-      Debug.Log("Plate pressed");
-      Debug.Log(other);
       onEnterAction.PerformAction();
     }
   }
 
   void OnTriggerExit2D (Collider2D other) {
     if (isAllowedToPress(other)) {
-      Debug.Log("Plate released");
-      Debug.Log(other);
       onExitAction.PerformAction();
     }
   }
