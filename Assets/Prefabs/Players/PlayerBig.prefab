@@ -184,9 +184,9 @@ MonoBehaviour:
   maxRunSpeed: 5
   accelRate: 1
   deccelRate: 1
-  maxJumpInputDelay: 0
-  jumpForce: 7
-  coyoteTime: 0
+  maxJumpInputDelay: 0.15
+  jumpForce: 8
+  coyoteTime: 0.2
   jumpSfx: {fileID: 8300000, guid: 1769aea40cfd08d49b0d7ea7f9395dc9, type: 3}
   jumpCoyoteTimer: 0
 --- !u!114 &8927650527551164714
