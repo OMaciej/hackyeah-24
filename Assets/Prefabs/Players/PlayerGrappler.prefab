@@ -151,7 +151,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 70
   maxSpeed: 13
-  maxRopeLen: 15
+  maxRopeLen: 10
+  audioSource: {fileID: -8031066699884378267}
+  grapplingHookSfx: {fileID: 8300000, guid: 31e1dc4eceb4dae42a22909fc06d6761, type: 3}
 --- !u!1 &4049819017221541507
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +189,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.34, y: 3.13, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2294861701949972818}
@@ -235,7 +237,7 @@ SpriteRenderer:
   m_SortingLayerID: 640921063
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1378502429, guid: f6a20234bf6402e48abae5264a32b590, type: 3}
+  m_Sprite: {fileID: -883503121, guid: 90191330131c95048b7b72de1147bdc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -294,7 +296,7 @@ MonoBehaviour:
   jumpForce: 10
   coyoteTime: 0.2
   fallingGravityScale: 1.25
-  jumpSfx: {fileID: 0}
+  jumpSfx: {fileID: 8300000, guid: 1769aea40cfd08d49b0d7ea7f9395dc9, type: 3}
   jumpCoyoteTimer: 0
 --- !u!114 &1427077456823206769
 MonoBehaviour:
@@ -344,7 +346,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -439,7 +441,7 @@ Animator:
   m_GameObject: {fileID: 4049819017221541507}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 86bf0817758aa214093471c893de0e82, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6d00e792caa3bd84fa8ebf5542910f3b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -482,9 +484,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16084814, y: -0.026808023}
+  m_Offset: {x: -0.5925455, y: -0.27908492}
   serializedVersion: 2
-  m_Radius: 0.9571068
+  m_Radius: 1.6410816
 --- !u!1 &4512123681382357821
 GameObject:
   m_ObjectHideFlags: 0
