@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textToDisplay: Athlete Lemur has a grappling hook! You can <b>left click</b> on
-    a grapple point to grapple to it
+    a hook to grapple to it
   displayOnlyOnce: 0
 --- !u!4 &748131404
 Transform:
