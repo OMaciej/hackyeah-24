@@ -2008,9 +2008,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2022015005495168041, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
-      propertyPath: maxRopeLen
-      value: 10
+    - target: {fileID: 2294861701949972818, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294861701949972818, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.02
       objectReference: {fileID: 0}
     - target: {fileID: 4049819017221541507, guid: 5227e5051bfe7e9a4bf5a276fb35a801, type: 3}
       propertyPath: m_Name
