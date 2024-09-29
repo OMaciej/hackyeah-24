@@ -84,6 +84,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(isGrounded() && rb.velocity.y < 0f)
+        {
+            rb.AddForce(Vector2.down * fallAccel, ForceMode2D.Force);
+        }
+
         float forceToApply;
 
         Vector2 platformVelocity = platformObjectController.getPlatformVelocity();
@@ -218,6 +223,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxJumpInputDelay;
     [SerializeField] private float jumpForce;
     [SerializeField] private float coyoteTime;
+
+    [SerializeField] private float fallAccel;
 
     [SerializeField] private AudioClip jumpSfx;
 

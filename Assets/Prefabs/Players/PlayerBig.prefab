@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 4451681898257281578}
   - component: {fileID: 4516635370329452275}
   - component: {fileID: 7803144394423065874}
-  - component: {fileID: 6602880012716756278}
   m_Layer: 7
   m_Name: PlayerBig
   m_TagString: Player
@@ -187,6 +186,7 @@ MonoBehaviour:
   maxJumpInputDelay: 0.15
   jumpForce: 8
   coyoteTime: 0.2
+  fallAccel: 1.4
   jumpSfx: {fileID: 8300000, guid: 1769aea40cfd08d49b0d7ea7f9395dc9, type: 3}
   jumpCoyoteTimer: 0
 --- !u!114 &8927650527551164714
@@ -355,26 +355,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6602880012716756278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5772283523003243736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 300fe134ddd629f4eb057eed583260b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteId: 0
-  anim: 0
-  walk: []
-  jumpingAnim:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fallingAnim: []
 --- !u!1 &6248415920360917350
 GameObject:
   m_ObjectHideFlags: 0
